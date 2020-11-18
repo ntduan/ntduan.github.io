@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en-us">
+<html lang="zh-cn">
 
 <head>
   <title>NT - NT</title>
@@ -57,6 +57,12 @@
             </a>
         </li>
         
+        <li>
+            <a class="" href="https://ntduan.github.io/about/">
+                <i class="fa-li fa  fa-lg"></i><span>About Me</span>
+            </a>
+        </li>
+        
     </ul>
 </nav>
 
@@ -94,6 +100,34 @@
 We&rsquo;ll start with creating a new site with a very basic template.</p>
       
       <a href="https://ntduan.github.io/posts/creating-a-new-theme/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://ntduan.github.io/posts/javascript/memoize/" title="Javascript 中的缓存">Javascript 中的缓存</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2018-06-12T00:00:00Z">Jun 12, 2018</time>
+        </li>
+        
+        
+
+        
+
+        <li>3 minutes read</li>
+    </ul>
+</aside>
+
+      
+
+      <p>斐波那契数列 现在我们来看一个老生常谈的问题&ndash;计算斐波那契数列的某一项的值。首先我们用递归来实现：
+const fibonacci = n =&gt; { if (n === 0 || n === 1) return 1; return fibonacci(n - 1) + fibonacci(n - 2); }; 很简单是吧？试试计算 fibonacci(100)。你的电脑很可能会卡死。为什么会这样呢？当你计算 f(n) 是，会先计算 f(n-1) 和 f(n-2)，而计算 f(n-1) 的时候， 会先计算 f(n-2) 和 f(n-3)。注意到了吗？ f(n-2) 被重复计算了。实际上该程序的时间复杂度是 O(2^n)，也就是说当 n = 100 的时候，足足需要计算 2^100 = 1.26e+30 次！
+然后要优化这个算法，也很简单。很自然的就想到的就是避免重复计算，我们使用一个闭包（closure）缓存我们的计算结果：
+const fibonacci = (() =&gt; { const memo = {}; // 计算过的值缓存在这里  const func = n =&gt; { if (memo[n] === undefined) { if (n === 0 || n === 1) { memo[n] = 1; } else { memo[n] = func(n - 1) + func(n - 2); } } return memo[n]; }; return func; })(); 返回的 func 和 memo 关联起来。在脱离了 memo 的作用域后，依然能通过 func 访问 memo。现在我们在 memo 中缓存了第 N 项的计算结果， 这样我们就避免了大量的重复计算。不难看出，现在的时间复杂度是 O(N)。</p>
+      
+      <a href="https://ntduan.github.io/posts/javascript/memoize/">Read more…</a>
       
     </li>
     
